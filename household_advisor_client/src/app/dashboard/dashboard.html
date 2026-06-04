@@ -1,0 +1,61 @@
+<div class="dashboard">
+    <header class="w-full bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="w-full mx-auto px-6 py-4 flex items-center justify-between">
+
+            <!-- Logo / App Name -->
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm">
+                    <span class="text-white font-bold text-lg">⚡</span>
+                </div>
+                <h1 class="text-xl font-semibold text-gray-800 tracking-tight">
+                    WattWise AI
+                </h1>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <button
+                    class="hidden md:block px-4 py-2 text-sm font-medium rounded-xl bg-gray-100 hover:bg-gray-200 transition">
+                    <i class="pi pi-user" style="font-size: 1rem"></i>
+                </button>
+
+                <!-- Mobile Menu Icon -->
+                <button class="md:hidden text-gray-700 text-xl">
+                    ☰
+                </button>
+            </div>
+
+        </div>
+    </header>
+    <div class="content w-full flex p-10 justify-center">
+        <p-accordion [value]="acc_activeTabs" [multiple]="true" class="w-full">
+            <p-accordion-panel header="Energy Consumption"value="0">
+                <p-accordion-header>
+                    <span class="pi pi-home mr-2"></span>
+                    Energy Consumption
+                </p-accordion-header>
+                <p-accordion-content>
+                    <app-profile-data></app-profile-data>
+                </p-accordion-content>
+            </p-accordion-panel>
+            <p-accordion-panel header="Cost Analysis" value="1">
+                 <p-accordion-header>
+                    <span class="pi pi-chart-line mr-2"></span>
+                    Cost Analysis
+                </p-accordion-header>
+                <p-accordion-content>
+                    <p>Content for Cost Analysis</p>
+                </p-accordion-content>
+            </p-accordion-panel>
+            <p-accordion-panel value="2">   
+                 <p-accordion-header>
+                    <span class="pi pi-lightbulb mr-2"></span>
+                    Recommendations
+                </p-accordion-header> 
+                <p-accordion-content>
+                    <p>Content for Recommendations</p>
+                </p-accordion-content>
+            </p-accordion-panel>
+        </p-accordion>
+    </div>
+</div>
