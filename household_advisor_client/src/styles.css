@@ -17,14 +17,31 @@
 }
  */
 
- .p-button {
-     background: #424242;
- }
+
+ h1, h2, h3, h4, .heading {
+  font-family: 'Titillium Web', sans-serif;
+}
  
- @tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import 'tailwindcss';
-@import "primeicons/primeicons.css";
+ @import 'tailwindcss';
+ @import "primeicons/primeicons.css";
+
+:root {
+  /* Primary palette (optional but good) */
+  --p-primary-500: 59 130 246;
+
+  /* ✅ THIS CONTROLS BUTTON COLOR */
+  --p-button-primary-background: rgb(59 130 246);
+  --p-button-primary-border-color: rgb(59 130 246);
+  --p-button-primary-hover-background: rgb(37 99 235);
+}
+
+
+.p-button {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+
+
 
 

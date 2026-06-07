@@ -1,88 +1,97 @@
 <div class="profile-form-ctr flex">
-    <div class="flex justify-center w-full">
-       <p-card class="w-full shadow-none border" header="Profile Data Collection" subheader="Help us understand your household better by providing some details. This will allow us to give you more accurate insights and recommendations.">
-        <p-stepper [(value)]="activeStep" class="w-[80%]">
-            <p-step-list>
-                <p-step [value]="0" class="flex flex-row flex-auto gap-2">
-                    <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                        <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                            <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                                [ngClass]="{
+    <div class="flex flex-col justify-center w-full pt-4 gap-4">
+        @if(!profileForm.valid && profileForm.touched) {<p-message severity="error" icon="pi pi-times-circle" text="Please make sure all the values are entered before submitting." styleClass="text-center" size="large"></p-message>}
+        <p-card class="w-full shadow-none border" header="Profile Data Collection"
+            subheader="Help us understand your household better by providing some details. This will allow us to give you more accurate insights and recommendations.">
+            <p-stepper [(value)]="activeStep" class="w-[80%]">
+                <p-step-list>
+                    <p-step [value]="0" class="flex flex-row flex-auto gap-2">
+                        <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                            <button class="bg-transparent border-0 inline-flex flex-col gap-2  cursor-pointer"
+                                (click)="activateCallback()">
+                                <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                                    [ngClass]="{
                                         'bg-emerald-500 text-white border-emerald-500': value <= activeStep,
                                         'border-surface': value > activeStep
                                     }">
-                                <i class="pi pi-user"></i>
-                            </span>
-                        </button>
-                    </ng-template>
-                </p-step>
-                <p-step [value]="1" class="flex flex-row flex-auto gap-2">
-                    <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                        <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                            <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                                [ngClass]="{
+                                    <i class="pi pi-user"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                    </p-step>
+                    <p-step [value]="1" class="flex flex-row flex-auto gap-2">
+                        <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                            <button class="bg-transparent border-0 inline-flex flex-col gap-2  cursor-pointer"
+                                (click)="activateCallback()">
+                                <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                                    [ngClass]="{
                                         'bg-emerald-500 text-white border-emerald-500': value <= activeStep,
                                         'border-surface': value > activeStep
                                     }">
-                                <i class="pi pi-user"></i>
-                            </span>
-                        </button>
-                    </ng-template>
-                </p-step>
-                <p-step [value]="2" class="flex flex-row flex-auto gap-2">
-                    <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                        <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                            <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                                [ngClass]="{
+                                    <i class="pi pi-user"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                    </p-step>
+                    <p-step [value]="2" class="flex flex-row flex-auto gap-2">
+                        <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                            <button class="bg-transparent border-0 inline-flex flex-col gap-2  cursor-pointer"
+                                (click)="activateCallback()">
+                                <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                                    [ngClass]="{
                                         'bg-emerald-500 text-white border-emerald-500': value <= activeStep,
                                         'border-surface': value > activeStep
                                     }">
-                                <i class="pi pi-star"></i>
-                            </span>
-                        </button>
-                    </ng-template>
-                </p-step>
-                <p-step [value]="3" class="flex flex-row flex-auto gap-2">
-                    <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                        <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                            <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                                [ngClass]="{
+                                    <i class="pi pi-star"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                    </p-step>
+                    <p-step [value]="3" class="flex flex-row flex-auto gap-2">
+                        <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                            <button class="bg-transparent border-0 inline-flex flex-col gap-2  cursor-pointer"
+                                (click)="activateCallback()">
+                                <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                                    [ngClass]="{
                                         'bg-emerald-500 text-white border-emerald-500': value <= activeStep,
                                         'border-surface': value > activeStep
                                     }">
-                                <i class="pi pi-id-card"></i>
-                            </span>
-                        </button>
-                    </ng-template>
-                </p-step>
-                <p-step [value]="4" class="flex flex-row flex-auto gap-2">
-                    <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                        <button class="bg-transparent border-0 inline-flex flex-col gap-2" (click)="activateCallback()">
-                            <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
-                                [ngClass]="{
+                                    <i class="pi pi-id-card"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                    </p-step>
+                    <p-step [value]="4" class="flex flex-row flex-auto gap-2">
+                        <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                            <button class="bg-transparent border-0 inline-flex flex-col gap-2  cursor-pointer"
+                                (click)="activateCallback()">
+                                <span class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                                    [ngClass]="{
                                         'bg-emerald-500 text-white border-emerald-500': value <= activeStep,
                                         'border-surface': value > activeStep
                                     }">
-                                <i class="pi pi-id-card"></i>
-                            </span>
-                        </button>
-                    </ng-template>
-                </p-step>
-            </p-step-list>
-            <p-step-panels>
-                @for(step of constants.formDetails | keyvalue; track step.key) {
-                <p-step-panel [value]="Number(step.key)">
-                    <ng-template #content let-activateCallback="activateCallback">
-                        <h4 class="mb-8 w-full text-center text-2xl font-bold">{{step.value.label}}</h4>
-                        <div class="flex flex-col gap-2" >
-                            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-4 w-full max-h-[550px] flex-wrap">
-                                @for(field of step.value.fields; track field.controlName) {
-                                <div class="flex-1">
-                                    @switch(field.type) {
-                                    @case('number') {
+                                    <i class="pi pi-id-card"></i>
+                                </span>
+                            </button>
+                        </ng-template>
+                    </p-step>
+                </p-step-list>
+                <p-step-panels>
+                    @for(step of constants.formDetails | keyvalue; track step.key) {
+                    <p-step-panel [value]="Number(step.key)">
+                        <ng-template #content let-activateCallback="activateCallback">
+                            <h4 class="mb-8 w-full text-center text-2xl font-bold">{{step.value.label}}</h4>
+                            <div class="flex flex-col gap-2">
+                                <form [formGroup]="profileForm" (ngSubmit)="onSubmit()"
+                                    class="flex flex-col items-center gap-4 w-full max-h-[550px] flex-wrap">
+                                    @for(field of step.value.fields; track field.controlName) {
+                                    <div class="flex-1">
+                                        @switch(field.type) {
+                                        @case('number') {
                                         <p-floatlabel variant="in" class="w-xs">
                                             <input pInputText [id]="field.controlName" autocomplete="off"
-                                                formControlName="{{field.controlName}}" [name]="field.controlName" class="w-full"/>
+                                                formControlName="{{field.controlName}}" [name]="field.controlName"
+                                                class="w-full" />
                                             <label for="{{field.controlName}}">{{field.label}}</label>
                                         </p-floatlabel>
                                         @if (profileForm.get(field.controlName)?.invalid &&
@@ -90,9 +99,9 @@
                                         <p-message severity="error" size="small" variant="simple">{{field.label}} is
                                             required.</p-message>
                                         }
-                                    }
+                                        }
 
-                                    @case('select') {
+                                        @case('select') {
                                         <p-floatlabel variant="in" class="w-xs">
                                             <p-select id="{{field.controlName}}" [options]="field.options!"
                                                 formControlName="{{field.controlName}}" class="w-full" />
@@ -104,41 +113,50 @@
                                         <p-message severity="error" size="small" variant="simple">{{field.label}} is
                                             required.</p-message>
                                         }
-                                    }
+                                        }
 
 
-                                    @case('checkbox') {
-                                    <div class="min-w-[320px]">
-                                        <p-checkbox inputId="{{field.controlName}}" binary="true"
-                                            formControlName="{{field.controlName}}"></p-checkbox>
-                                        <label for="{{field.controlName}}" class="ml-3 font-semibold text-gray-500 cursor-pointer">{{field.label}}</label>
-                                        @if (profileForm.get(field.controlName)?.invalid &&
-                                        (profileForm.get(field.controlName)?.touched
-                                        )) {
+                                        @case('checkbox') {
+                                        <div class="min-w-[320px]">
+                                            <p-checkbox inputId="{{field.controlName}}" binary="true"
+                                                formControlName="{{field.controlName}}"></p-checkbox>
+                                            <label for="{{field.controlName}}"
+                                                class="ml-3 font-semibold text-gray-500 cursor-pointer">{{field.label}}</label>
+                                            @if (profileForm.get(field.controlName)?.invalid &&
+                                            (profileForm.get(field.controlName)?.touched
+                                            )) {
                                             <p-message severity="error" size="small" variant="simple">{{field.label}} is
                                                 required.</p-message>
-                                        }
+                                            }
                                         </div>
+                                        }
+                                        }
+
+                                    </div>
                                     }
+                                </form>
+
+                            </div>
+                            <div class="flex pt-6" [ngClass]="Number(step.key) > 0 ? 'justify-between' : 'justify-end' ">
+                                @if(Number(step.key) > 0) {<p-button (onClick)="activateCallback(Number(step.key) -1)"
+                                    label="Back" icon="pi pi-arrow-left" iconPos="left" />}
+                                @if(Number(step.key) < 4) {
+                                    <p-button (onClick)="activateCallback(Number(step.key) + 1)" label="Next"
+                                        icon="pi pi-arrow-right" iconPos="right" />
                                 }
-
-                                </div>
+                                @if(Number(step.key) === 4) {
+                                    <p-button (onClick)="onSubmit()" label="Submit" [disabled]="!profileForm.touched"/>
                                 }
-                            </form>
-
-                        </div>
-                        <div class="flex pt-6 justify-end">
-                            <p-button (onClick)="activateCallback(Number(step.key) + 1)" label="Next" icon="pi pi-arrow-right"
-                                iconPos="right" />
-                        </div>
-                    </ng-template>
-                </p-step-panel>
-                }
+                            </div>
+                        </ng-template>
+                    </p-step-panel>
+                    }
 
 
-            </p-step-panels>
-        </p-stepper>
+
+                </p-step-panels>
+            </p-stepper>
         </p-card>
-        
+
     </div>
 </div>

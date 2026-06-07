@@ -11,12 +11,14 @@ import { MessageModule } from 'primeng/message';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CardModule } from 'primeng/card';
 import * as constants from './constants';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-profile-data',
   imports: [CommonModule, ReactiveFormsModule, MessageModule, StepperModule, InputNumberModule, InputTextModule, SelectModule, CheckboxModule, ButtonModule, FloatLabelModule, CardModule],
   templateUrl: './profile-data.html',
   styleUrl: './profile-data.css',
+  providers: [AppService]
 })
 export class ProfileData {
   activeStep: number = 0;
@@ -24,7 +26,7 @@ export class ProfileData {
   constants = constants.default;
   Number = Number; // to use in template for converting string keys to numbers
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private appService: AppService) {
     console.log(this.constants.formDetails);
     this.profileForm = this.fb.group({
 
@@ -177,7 +179,10 @@ export class ProfileData {
   onSubmit() {
     if (this.profileForm.valid) {
       console.log(this.profileForm.value);
+      this.appService.setProfileData(this.profileForm.value);
     } else {
+      
+      console.log(this.profileForm);
       this.profileForm.markAllAsTouched();
     }
   }

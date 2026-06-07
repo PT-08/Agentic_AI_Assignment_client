@@ -9,8 +9,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [PrimeUI],
-  // tailwind.config.js
+  
   corePlugins: {
     preflight: false,
   }

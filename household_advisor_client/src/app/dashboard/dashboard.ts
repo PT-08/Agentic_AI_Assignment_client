@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AccordionModule } from 'primeng/accordion';
 import { ProfileData } from '../profile-data/profile-data';
+import { ConsumptionAnalysis } from '../consumption-analysis/consumption-analysis';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AccordionModule, ProfileData],
+  imports: [AccordionModule, ProfileData, ConsumptionAnalysis],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
   standalone: true
