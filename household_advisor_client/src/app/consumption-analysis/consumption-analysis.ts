@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { ConsumptionDashboardComponent, ConsumptionData } from './consumption-dashboard/consumption-dashboard';
 import { SolarRoiComponent, SolarRoiData } from './solar-roi/solar-roi';
+import { SimilarHouseholdsComponent, ComparisionSummary } from './similar-households/similar-households';
 
 
 const solarRoiData: SolarRoiData = {
@@ -75,10 +76,59 @@ const consumptionData: ConsumptionData = {
   ]
 }
 
+const similarHouseholdsData: ComparisionSummary = {
+   "comparison_columns": [
+      "house_type",
+      "num_bedrooms",
+      "floor_area_sqft",
+      "num_floors",
+      "num_occupants",
+      "climate_zone",
+      "city_tier"
+    ],
+    "similar_households_found": 1,
+    "top_matches": [
+      {
+        "house_type": "Apartment",
+        "num_bedrooms": 2,
+        "floor_area_sqft": 706.0,
+        "num_occupants": 3,
+        "climate_zone": "Hot & Dry",
+        "city_tier": "Tier 3",
+        "daily_energy_consumption_kWh": 34.43,
+        "monthly_energy_consumption_kWh": 1032.8,
+        "similarity_distance": 870.0999999999999
+      },
+      {
+        "house_type": "Apartment",
+        "num_bedrooms": 2,
+        "floor_area_sqft": 906.0,
+        "num_occupants": 3,
+        "climate_zone": "Hot & Dry",
+        "city_tier": "Tier 3",
+        "daily_energy_consumption_kWh": 44.43,
+        "monthly_energy_consumption_kWh": 932.8,
+        "similarity_distance": 900
+      }
+    ],
+    "peer_average_daily_kWh": 34.43,
+    "peer_average_monthly_kWh": 1032.8,
+    "target_daily_kWh": 24,
+    "target_monthly_kWh": 800,
+    "daily_percentile": 20,
+    "monthly_percentile": 15,
+    "notes": [
+                "The comparison uses occupancy, appliance, building envelope, and renewable asset ",
+                "features from the profile to rank households with similar energy use patterns.",
+                "Percentile indicates how your household compares to similar households. ",
+                "Higher percentile means higher energy consumption relative to peers."
+            ]
+}
+
 
 @Component({
   selector: 'app-consumption-analysis',
-  imports: [ConsumptionDashboardComponent, SolarRoiComponent],
+  imports: [ConsumptionDashboardComponent, SolarRoiComponent, SimilarHouseholdsComponent],
   templateUrl: './consumption-analysis.html',
   styleUrl: './consumption-analysis.css',
   providers: [AppService]
@@ -86,4 +136,5 @@ const consumptionData: ConsumptionData = {
 export class ConsumptionAnalysis {
   consumptionData = consumptionData
   solarRoiData = solarRoiData
+  similarHouseholdsData = similarHouseholdsData
 }

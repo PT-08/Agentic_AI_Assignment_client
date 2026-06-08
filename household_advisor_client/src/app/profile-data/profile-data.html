@@ -1,10 +1,17 @@
 <div class="profile-form-ctr flex">
     <div class="flex flex-col justify-center w-full pt-4 gap-4">
-        @if(!profileForm.valid && profileForm.touched) {<p-message severity="error" icon="pi pi-times-circle" text="Please make sure all the values are entered before submitting." styleClass="text-center" size="large"></p-message>}
-        <p-card class="w-full shadow-none border" header="Profile Data Collection"
-            subheader="Help us understand your household better by providing some details. This will allow us to give you more accurate insights and recommendations.">
-            <p-stepper [(value)]="activeStep" class="w-[80%]">
-                <p-step-list>
+        @if(!profileForm.valid && profileForm.touched) {<p-message severity="error" icon="pi pi-times-circle"
+            text="Please make sure all the values are entered before submitting." styleClass="text-center h-16 flex items-center"
+            size="large"></p-message>}
+        <div class="w-full shadow-none border bg-emerald-50/30 rounded-xl p-10">
+            <div class="flex flex-col border border-slate-100 bg-white px-10 py-5 rounded-xl mb-6">
+                <h2 class="text-lg font-semibold text-slate-800 leading-tight">Profile Data Collection</h2>
+                <p class="text-[10px] font-semibold tracking-[0.2em] text-slate-400 uppercase mt-2">Help us understand
+                    your household better by providing some details. This will allow us to give you more accurate
+                    insights and recommendations.</p>
+            </div>
+            <p-stepper [(value)]="activeStep" class="flex flex-col gap-6 items-center w-full">
+                <p-step-list class="w-[60%]">
                     <p-step [value]="0" class="flex flex-row flex-auto gap-2">
                         <ng-template #content let-activateCallback="activateCallback" let-value="value">
                             <button class="bg-transparent border-0 inline-flex flex-col gap-2  cursor-pointer"
@@ -76,16 +83,16 @@
                         </ng-template>
                     </p-step>
                 </p-step-list>
-                <p-step-panels>
+                <p-step-panels class="w-[80%]">
                     @for(step of constants.formDetails | keyvalue; track step.key) {
                     <p-step-panel [value]="Number(step.key)">
                         <ng-template #content let-activateCallback="activateCallback">
                             <h4 class="mb-8 w-full text-center text-2xl font-bold">{{step.value.label}}</h4>
-                            <div class="flex flex-col gap-2">
-                                <form [formGroup]="profileForm" (ngSubmit)="onSubmit()"
-                                    class="flex flex-col items-center gap-4 w-full max-h-[550px] flex-wrap">
+                            <div class="flex flex-col gap-2 my-10">
+                                <form [formGroup]="profileForm" (ngSubmit)="onFormSubmit()"
+                                    class="flex flex-col items-center gap-4 w-full max-h-[550px] flex-wrap justify-end">
                                     @for(field of step.value.fields; track field.controlName) {
-                                    <div class="flex-1">
+                                    <div class="">
                                         @switch(field.type) {
                                         @case('number') {
                                         <p-floatlabel variant="in" class="w-xs">
@@ -137,15 +144,16 @@
                                 </form>
 
                             </div>
-                            <div class="flex pt-6" [ngClass]="Number(step.key) > 0 ? 'justify-between' : 'justify-end' ">
+                            <div class="flex pt-6"
+                                [ngClass]="Number(step.key) > 0 ? 'justify-between' : 'justify-end' ">
                                 @if(Number(step.key) > 0) {<p-button (onClick)="activateCallback(Number(step.key) -1)"
                                     label="Back" icon="pi pi-arrow-left" iconPos="left" />}
-                                @if(Number(step.key) < 4) {
-                                    <p-button (onClick)="activateCallback(Number(step.key) + 1)" label="Next"
-                                        icon="pi pi-arrow-right" iconPos="right" />
+                                @if(Number(step.key)
+                                < 4) { <p-button (onClick)="activateCallback(Number(step.key) + 1)" label="Next"
+                                    icon="pi pi-arrow-right" iconPos="right" />
                                 }
                                 @if(Number(step.key) === 4) {
-                                    <p-button (onClick)="onSubmit()" label="Submit" [disabled]="!profileForm.touched"/>
+                                <p-button (onClick)="onSubmit()" label="Submit" [disabled]="!profileForm.touched" />
                                 }
                             </div>
                         </ng-template>
@@ -156,7 +164,7 @@
 
                 </p-step-panels>
             </p-stepper>
-        </p-card>
+        </div>
 
     </div>
 </div>

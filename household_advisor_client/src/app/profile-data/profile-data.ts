@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StepperModule } from 'primeng/stepper';
@@ -25,6 +25,8 @@ export class ProfileData {
   profileForm: FormGroup;
   constants = constants.default;
   Number = Number; // to use in template for converting string keys to numbers
+
+  @Input() onSubmit: () => void = () => {};
 
   constructor(private fb: FormBuilder, private appService: AppService) {
     console.log(this.constants.formDetails);
@@ -86,12 +88,16 @@ export class ProfileData {
   }
 
   addConstraints() {
+    const constrainedFields = ['num_ac_units', 'ac_star_rating', 'ac_usage_hrs_per_day', 'water_heater_capacity_L', 'water_heater_usage_hrs_per_day', 'fridge_capacity_L', 'fridge_star_rating', 'washing_machine_type', 'washing_cycles_per_week', 'dishwasher_cycles_per_week', 'solar_capacity_kWp', 'battery_capacity_kWh'];
+
+    // disable all constrained fields initially
+    constrainedFields.forEach(field => this.profileForm.get(field)?.disable());
     // AC constriaints
     this.profileForm.get('has_ac')?.valueChanges.subscribe(val => {
       const acControls = ['num_ac_units', 'ac_star_rating', 'ac_usage_hrs_per_day'];
 
       acControls.forEach(ctrl => {
-        if (val === 1) {
+        if (val === true) {
           this.profileForm.get(ctrl)?.enable();
         } else {
           this.profileForm.get(ctrl)?.disable();
@@ -103,7 +109,7 @@ export class ProfileData {
     this.profileForm.get('water_heater_type')?.valueChanges.subscribe(val => {
       const waterHeaterControls = ['water_heater_capacity_L', 'water_heater_usage_hrs_per_day'];
 
-      if (val) {
+      if (val && val !== 'None') {
         waterHeaterControls.forEach(ctrl => this.profileForm.get(ctrl)?.enable());
       } else {
         waterHeaterControls.forEach(ctrl => this.profileForm.get(ctrl)?.disable());
@@ -114,7 +120,7 @@ export class ProfileData {
     this.profileForm.get('has_refrigerator')?.valueChanges.subscribe(val => {
       const fridgeControls = ['fridge_capacity_L', 'fridge_star_rating'];
 
-      if (val === 1) {
+      if (val === true) {
         fridgeControls.forEach(ctrl => this.profileForm.get(ctrl)?.enable());
       } else {
         fridgeControls.forEach(ctrl => this.profileForm.get(ctrl)?.disable());
@@ -125,7 +131,7 @@ export class ProfileData {
     this.profileForm.get('has_washing_machine')?.valueChanges.subscribe(val => {
       const washingMachineControls = ['washing_machine_type', 'washing_cycles_per_week'];
 
-      if (val === 1) {
+      if (val === true) {
         washingMachineControls.forEach(ctrl => this.profileForm.get(ctrl)?.enable());
       } else {
         washingMachineControls.forEach(ctrl => this.profileForm.get(ctrl)?.disable());
@@ -136,7 +142,7 @@ export class ProfileData {
     this.profileForm.get('has_dishwasher')?.valueChanges.subscribe(val => {
       const dishwasherControls = ['dishwasher_cycles_per_week'];
 
-      if (val === 1) {
+      if (val === true) {
         dishwasherControls.forEach(ctrl => this.profileForm.get(ctrl)?.enable());
       } else {
         dishwasherControls.forEach(ctrl => this.profileForm.get(ctrl)?.disable());
@@ -147,7 +153,7 @@ export class ProfileData {
     this.profileForm.get('has_solar_panels')?.valueChanges.subscribe(val => {
       const solarControls = ['solar_capacity_kWp'];
 
-      if (val === 1) {
+      if (val === true) {
         solarControls.forEach(ctrl => this.profileForm.get(ctrl)?.enable());
       } else {
         solarControls.forEach(ctrl => this.profileForm.get(ctrl)?.disable());
@@ -158,7 +164,7 @@ export class ProfileData {
     this.profileForm.get('has_battery_storage')?.valueChanges.subscribe(val => {
       const batteryControls = ['battery_capacity_kWh'];
 
-      if (val === 1) {
+      if (val === true) {
         batteryControls.forEach(ctrl => this.profileForm.get(ctrl)?.enable());
       } else {
         batteryControls.forEach(ctrl => this.profileForm.get(ctrl)?.disable());
@@ -176,13 +182,12 @@ export class ProfileData {
   }
 
 
-  onSubmit() {
+  onFormSubmit() {
     if (this.profileForm.valid) {
       console.log(this.profileForm.value);
       this.appService.setProfileData(this.profileForm.value);
+      this.onSubmit();
     } else {
-      
-      console.log(this.profileForm);
       this.profileForm.markAllAsTouched();
     }
   }

@@ -13,10 +13,10 @@
   </div>
 
   <!-- ── 4 KPI blocks ── -->
-  <div class="w-full grid grid-cols-4 divide-x divide-slate-100 bg-white border-b border-slate-100">
+  <div class="w-full grid grid-cols-4 divide-x divide-slate-100  border-b border-slate-100 mt-4 px-10 gap-4">
 
     <!-- Consumption -->
-    <div class="px-10 py-8">
+    <div class="px-10 py-8 border border-slate-100 bg-white rounded-xl">
       <p class="text-[10px] tracking-[0.18em] font-semibold text-slate-400 uppercase mb-3">Consumption</p>
       <div class="flex items-baseline gap-1.5">
         <span class="text-[2.8rem] font-bold text-slate-800 leading-none tabular-nums">{{ displayConsumption |
@@ -30,7 +30,7 @@
     </div>
 
     <!-- Solar — warm amber tint -->
-    <div class="px-10 py-8 bg-amber-50/40">
+    <div class="px-10 py-8 bg-amber-50/40 border border-amber-100 shadow-2xs rounded-xl">
       <p class="text-[10px] tracking-[0.18em] font-semibold text-amber-500 uppercase mb-3">Solar</p>
       <div class="flex items-baseline gap-1.5">
         <span class="text-[2.8rem] font-bold text-amber-600 leading-none tabular-nums">{{ displaySolar | number:'1.1-1'
@@ -41,7 +41,7 @@
     </div>
 
     <!-- Grid — cool blue tint -->
-    <div class="px-10 py-8 bg-sky-50/40">
+    <div class="px-10 py-8 bg-sky-50/40 border border-sky-100 shadow-2xs rounded-xl">
       <p class="text-[10px] tracking-[0.18em] font-semibold text-sky-500 uppercase mb-3">Grid Draw</p>
       <div class="flex items-baseline gap-1.5">
         <span class="text-[2.8rem] font-bold text-sky-600 leading-none tabular-nums">{{ displayGrid | number:'1.1-1'
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Monthly Bill — violet tint -->
-    <div class="px-10 py-8 bg-violet-50/40">
+    <div class="px-10 py-8 bg-violet-50/40 border border-violet-100 shadow-2xs rounded-xl">
       <p class="text-[10px] tracking-[0.18em] font-semibold text-violet-500 uppercase mb-3">Monthly Bill</p>
       <div class="flex items-baseline gap-1.5">
         <span class="text-[2.8rem] font-bold text-violet-600 leading-none tabular-nums">₹{{ displayBill | number:'1.0-0'
