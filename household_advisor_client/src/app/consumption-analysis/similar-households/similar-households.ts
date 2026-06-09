@@ -36,10 +36,9 @@ export interface ComparisionSummary {
   imports: [CommonModule, ChartModule],
   templateUrl: './similar-households.html',
   styleUrls: ['./similar-households.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimilarHouseholdsComponent implements OnInit, OnChanges {
-  @Input() data!: ComparisionSummary;
+  @Input() data!: ComparisionSummary |  null;
 
   tableRows: HouseholdMatch[] = [];
   chartData: any = {};
@@ -64,24 +63,24 @@ export class SimilarHouseholdsComponent implements OnInit, OnChanges {
   private buildTableRows() {
     // Construct the explicit Current Profile row using target consumption metrics
     const currentProfile: HouseholdMatch = {
-      house_type: this.data.top_matches[0]?.house_type || 'Apartment', 
-      num_bedrooms: this.data.top_matches[0]?.num_bedrooms || 2,
-      floor_area_sqft: this.data.top_matches[0]?.floor_area_sqft || 706.0,
-      num_occupants: this.data.top_matches[0]?.num_occupants || 3,
-      climate_zone: this.data.top_matches[0]?.climate_zone || 'Hot & Dry',
-      city_tier: this.data.top_matches[0]?.city_tier || 'Tier 3',
-      daily_energy_consumption_kWh: this.data.target_daily_kWh,
-      monthly_energy_consumption_kWh: this.data.target_monthly_kWh,
+      house_type: this.data?.top_matches[0]?.house_type || 'Apartment', 
+      num_bedrooms: this.data?.top_matches[0]?.num_bedrooms || 2,
+      floor_area_sqft: this.data?.top_matches[0]?.floor_area_sqft || 706.0,
+      num_occupants: this.data?.top_matches[0]?.num_occupants || 3,
+      climate_zone: this.data?.top_matches[0]?.climate_zone || 'Hot & Dry',
+      city_tier: this.data?.top_matches[0]?.city_tier || 'Tier 3',
+      daily_energy_consumption_kWh: this.data?.target_daily_kWh || 0,
+      monthly_energy_consumption_kWh: this.data?.target_monthly_kWh || 0,
       similarity_distance: 0,
       isCurrentProfile: true,
       displayName: 'Your Profile'
     };
 
-    const matches = this.data.top_matches.map((match, i) => ({
+    const matches = this.data?.top_matches.map((match, i) => ({
       ...match,
       isCurrentProfile: false,
       displayName: `Match #${i + 1}`
-    }));
+    })) || []
 
     // Put your profile at the top of the grid to stand out cleanly
     this.tableRows = [currentProfile, ...matches];
@@ -93,12 +92,12 @@ export class SimilarHouseholdsComponent implements OnInit, OnChanges {
 
     const dailyValues = [
       ...this.tableRows.map(r => r.daily_energy_consumption_kWh),
-      this.data.peer_average_daily_kWh
+      this.data?.peer_average_daily_kWh || 0
     ];
 
     const monthlyValues = [
       ...this.tableRows.map(r => r.monthly_energy_consumption_kWh),
-      this.data.peer_average_monthly_kWh
+      this.data?.peer_average_monthly_kWh || 0
     ];
 
     this.chartData = {

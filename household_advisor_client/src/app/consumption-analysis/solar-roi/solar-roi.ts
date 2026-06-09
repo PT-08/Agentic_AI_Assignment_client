@@ -34,11 +34,10 @@ interface ScenarioVM extends SolarScenario {
   imports: [CommonModule, ChartModule],
   templateUrl: "./solar-roi.html",
   styleUrls:["./solar-roi.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SolarRoiComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() data!: SolarRoiData;
+  @Input() data: SolarRoiData | null = null;
 
   private readonly COST_PER_KWP = 50000;
 

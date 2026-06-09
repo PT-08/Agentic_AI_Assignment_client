@@ -82,7 +82,7 @@ export interface Constants {
             { label: "Dishwasher Cycles per Week", controlName: "dishwasher_cycles_per_week", type: "number" },
             { label: "Has Microwave?", controlName: "has_microwave", type: "checkbox" },]
         },
-        3: { label: "Building Envelope", fields: [{ label: "Insulation Quality", controlName: "insulation_quality", type: "select", options: ["Poor", "Average", "Good"] }, { label: "Window Type", controlName: "window_type", type: "select", options: ["Single Pane", "Double Pane", "Triple Pane"] }, { label: "Roof Type", controlName: "roof_type", type: "select", options: ["Concrete", "Insulated RCC"] }] },
+        3: { label: "Building Envelope", fields: [{ label: "Insulation Quality", controlName: "insulation_quality", type: "select", options: ["Poor", "Average", "Good"] }, { label: "Window Type", controlName: "window_type", type: "select", options: ["Single Pane", "Double Pane", "Triple Pane"] }, { label: "Roof Type", controlName: "roof_type", type: "select", options: ["Sloped Tiled", "Flat RCC", "Insulated RCC"] }] },
         4: {
             label: "Renewable Energy Assets", fields: [{ label: "Has Solar Panels?", controlName: "has_solar_panels", type: "checkbox" },
             { label: "Solar Capacity (kWp)", controlName: "solar_capacity_kWp", type: "number" },

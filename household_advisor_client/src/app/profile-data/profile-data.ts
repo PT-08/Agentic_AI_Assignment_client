@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StepperModule } from 'primeng/stepper';
@@ -26,62 +26,62 @@ export class ProfileData {
   constants = constants.default;
   Number = Number; // to use in template for converting string keys to numbers
 
-  @Input() onSubmit: () => void = () => {};
+  @Output() onSubmit = new EventEmitter();
 
   constructor(private fb: FormBuilder, private appService: AppService) {
     console.log(this.constants.formDetails);
     this.profileForm = this.fb.group({
 
-      house_type: ['', Validators.required],
-      num_bedrooms: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
-      climate_zone: ['', Validators.required],
-      city_tier: ['', Validators.required],
+      house_type: ['Apartment', Validators.required],
+      num_bedrooms: ['4', [Validators.required, Validators.min(1), Validators.max(10)]],
+      climate_zone: ['Hot & Dry', Validators.required],
+      city_tier: ["Tier 1", Validators.required],
 
-      num_adults: ['', [Validators.required, Validators.min(1), Validators.max(20)]],
-      num_children: ['', [Validators.required, Validators.min(1), Validators.max(20)]],
+      num_adults: [3, [Validators.required, Validators.min(1), Validators.max(20)]],
+      num_children: [1, [Validators.required, Validators.min(1), Validators.max(20)]],
 
-      has_ac: [''],
-      num_ac_units: ['', [Validators.min(0), Validators.max(10)]],
-      ac_star_rating: ['', [Validators.min(1), Validators.max(5)]],
-      ac_usage_hrs_per_day: ['', [Validators.min(0), Validators.max(24)]],
+      has_ac: [true],
+      num_ac_units: [4, [Validators.min(0), Validators.max(10)]],
+      ac_star_rating: [4, [Validators.min(1), Validators.max(5)]],
+      ac_usage_hrs_per_day: [24, [Validators.min(0), Validators.max(24)]],
 
-      num_ceiling_fans: ['', [Validators.min(0), Validators.max(10)]],
+      num_ceiling_fans: [4, [Validators.min(0), Validators.max(10)]],
 
-      water_heater_type: [''],
-      water_heater_capacity_L: ['', [Validators.min(0)]],
-      water_heater_usage_hrs_per_day: ['', [Validators.min(0), Validators.max(24)]],
+      water_heater_type: [true],
+      water_heater_capacity_L: [50, [Validators.min(0)]],
+      water_heater_usage_hrs_per_day: [18, [Validators.min(0), Validators.max(24)]],
 
-      has_refrigerator: [''],
-      fridge_capacity_L: ['', [Validators.min(50), Validators.max(1000)]],
-      fridge_star_rating: ['', [Validators.min(1), Validators.max(5)]],
+      has_refrigerator: [true],
+      fridge_capacity_L: [550, [Validators.min(50), Validators.max(1000)]],
+      fridge_star_rating: [1, [Validators.min(1), Validators.max(5)]],
 
-      has_washing_machine: [''],
-      washing_machine_type: [''],
-      washing_cycles_per_week: ['', [Validators.min(0), Validators.max(50)]],
+      has_washing_machine: [true],
+      washing_machine_type: ["Top Load"],
+      washing_cycles_per_week: [20, [Validators.min(0), Validators.max(50)]],
 
-      num_computers: ['', [Validators.min(0), Validators.max(10)]],
-      computer_usage_hrs_per_day: ['', [Validators.min(0), Validators.max(24)]],
+      num_computers: [5, [Validators.min(0), Validators.max(10)]],
+      computer_usage_hrs_per_day: [15, [Validators.min(0), Validators.max(24)]],
 
-      num_tvs: ['', [Validators.min(0), Validators.max(10)]],
-      tv_screen_size_inch: ['', [Validators.min(20), Validators.max(100)]],
-      tv_usage_hrs_per_day: ['', [Validators.min(0), Validators.max(24)]],
+      num_tvs: [2, [Validators.min(0), Validators.max(10)]],
+      tv_screen_size_inch: [55, [Validators.min(20), Validators.max(100)]],
+      tv_usage_hrs_per_day: [10, [Validators.min(0), Validators.max(24)]],
 
-      has_dishwasher: [''],
-      dishwasher_cycles_per_week: ['', [Validators.min(0), Validators.max(50)]],
+      has_dishwasher: [true],
+      dishwasher_cycles_per_week: [20, [Validators.min(0), Validators.max(50)]],
 
-      has_microwave: [''],
+      has_microwave: [true],
 
-      insulation_quality: ['', Validators.required],
-      window_type: ['', Validators.required],
-      roof_type: ['', Validators.required],
+      insulation_quality: ["Good", Validators.required],
+      window_type: ['Double Pane', Validators.required],
+      roof_type: ["Flat RCC", Validators.required],
 
       has_solar_panels: [''],
-      solar_capacity_kWp: ['', [Validators.min(0), Validators.max(50)]],
+      solar_capacity_kWp: [0.5, [Validators.min(0), Validators.max(50)]],
 
       has_battery_storage: [''],
       battery_capacity_kWh: ['', [Validators.min(0), Validators.max(100)]],
 
-      electricity_tariff_per_kWh: ['', [Validators.required, Validators.min(0)]]
+      electricity_tariff_per_kWh: [7, [Validators.required, Validators.min(0)]]
     });
 
     this.addConstraints();
@@ -186,7 +186,7 @@ export class ProfileData {
     if (this.profileForm.valid) {
       console.log(this.profileForm.value);
       this.appService.setProfileData(this.profileForm.value);
-      this.onSubmit();
+      setTimeout(() => this.onSubmit.emit(this.profileForm.value), 100);
     } else {
       this.profileForm.markAllAsTouched();
     }

@@ -1,3 +1,5 @@
+@if(data !== null) {
+
 <div class="w-full bg-slate-50 pb-10" style="font-family:'Inter',sans-serif">
 
       <!-- ── Section header ── -->
@@ -89,7 +91,7 @@
           </ng-container>
 
           <!-- ── Grouped bar chart ── -->
-          <div class="col-span-8 bg-white border border-slate-100 rounded-xl p-6 enter-card" style="animation-delay:.2s">
+          <div class="col-span-9 bg-white border border-slate-100 rounded-xl p-6 enter-card" style="animation-delay:.2s">
             <div class="flex items-center justify-between mb-5">
               <div>
                 <p class="text-[10px] tracking-[0.18em] font-semibold text-slate-400 uppercase">Savings vs Generation</p>
@@ -103,15 +105,10 @@
             <p-chart type="bar" [data]="chartData" [options]="chartOptions" height="280"></p-chart>
           </div>
 
-          <!-- ── Cumulative line chart ── -->
-          <div class="col-span-4 bg-white border border-slate-100 rounded-xl p-6 enter-card" style="animation-delay:.26s">
-            <p class="text-[10px] tracking-[0.18em] font-semibold text-slate-400 uppercase mb-1">Cumulative Savings</p>
-            <p class="text-base font-semibold text-slate-700 mb-5">Over 10 years</p>
-            <p-chart type="line" [data]="lineData" [options]="lineOptions" height="280"></p-chart>
-          </div>
+          
 
           <!-- ── Assumptions ── -->
-          <div class="col-span-12 bg-white border border-slate-100 rounded-xl p-6 enter-card" style="animation-delay:.3s">
+          <div class="col-span-3 bg-white border border-slate-100 rounded-xl p-6 enter-card" style="animation-delay:.3s">
             <p class="text-[10px] tracking-[0.18em] font-semibold text-slate-400 uppercase mb-4">Assumptions</p>
             <div class="flex flex-wrap gap-x-8 gap-y-1.5">
               <span *ngFor="let a of data.assumptions" class="text-[11px] text-slate-400">· {{ a }}</span>
@@ -130,3 +127,4 @@
       </ng-template>
 
     </div>
+}

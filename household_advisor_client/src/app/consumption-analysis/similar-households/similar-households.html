@@ -1,4 +1,4 @@
-<div class="w-full bg-slate-50 pb-10" style="font-family:'Inter',sans-serif" *ngIf="data; else empty">
+@if(data !== null) {<div class="w-full bg-slate-50 pb-10" style="font-family:'Inter',sans-serif" *ngIf="data; else empty">
 
   <div class="w-full bg-white border-b border-slate-100 px-10 py-4 flex items-center justify-between">
     <div>
@@ -122,8 +122,10 @@
     <div class="col-span-4 bg-white border border-slate-100 rounded-xl p-6 enter-card" style="animation-delay: .3s">
       <p class="text-[10px] tracking-[0.18em] font-semibold text-slate-400 uppercase mb-4">Notes</p>
       <div class="flex flex-col gap-2">
-        <span *ngFor="let note of data.notes" class="text-[11px] text-slate-400 leading-relaxed">
-            {{ note }}
+        <span *ngFor="let note of data.notes[0].split('.')" class="text-[11px] text-slate-400 leading-relaxed">
+            @if(!!note) {
+              <span> · {{ note }} </span>
+            }
         </span>
       </div>
     </div>
@@ -136,3 +138,4 @@
     <p class="text-sm font-medium">No configuration metrics or baseline profile loaded.</p>
   </div>
 </ng-template>
+}

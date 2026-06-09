@@ -28,8 +28,9 @@
         </div>
     </header>
     <div class="content w-full flex p-10 justify-center">
-        <p-accordion [value]="acc_activeTabs" [multiple]="true" class="w-full" expandIcon="pi pi-arrow-circle-right" collapseIcon="pi pi-arrow-circle-down">
-            <p-accordion-panel header="Energy Consumption"value="0" >
+        <p-accordion [(value)]="acc_activeTabs" [multiple]="true" class="w-full" expandIcon="pi pi-arrow-circle-right"
+            collapseIcon="pi pi-arrow-circle-down">
+            <p-accordion-panel header="Energy Consumption" value="0">
                 <p-accordion-header>
                     <div class="flex items-center gap-2">
                         <i class="pi pi-home mr-2 text-2xl!"></i>
@@ -37,27 +38,27 @@
                     </div>
                 </p-accordion-header>
                 <p-accordion-content>
-                    <app-profile-data (onSubmit)="onProfileDataSubmit()"></app-profile-data>
+                    <app-profile-data (onSubmit)="onProfileDataSubmit($event)"></app-profile-data>
                 </p-accordion-content>
             </p-accordion-panel>
             <p-accordion-panel header="Cost Analysis" value="1">
-                 <p-accordion-header>
-                     <div class="flex items-center gap-2">
+                <p-accordion-header>
+                    <div class="flex items-center gap-2">
                         <i class="pi pi-chart-line mr-2 text-2xl!"></i>
                         <h2 class="text-lg font-semibold">Cost Analysis</h2>
                     </div>
                 </p-accordion-header>
                 <p-accordion-content>
-                    <app-consumption-analysis></app-consumption-analysis>
+                    <app-consumption-analysis [data]="consumptionData"></app-consumption-analysis>
                 </p-accordion-content>
             </p-accordion-panel>
-            <p-accordion-panel  value="2">
-                 <p-accordion-header>
+            <p-accordion-panel value="2">
+                <p-accordion-header>
                     <div class="flex items-center gap-2">
                         <i class="pi pi-lightbulb mr-2 text-2xl!"></i>
                         <h2 class="text-lg font-semibold">Recommendations</h2>
                     </div>
-                </p-accordion-header> 
+                </p-accordion-header>
                 <p-accordion-content>
                     <app-recommendations [data]="recommendationsData"></app-recommendations>
                 </p-accordion-content>
@@ -65,3 +66,6 @@
         </p-accordion>
     </div>
 </div>
+
+
+<app-loading-overlay [visible]="loading" [message]="'Analyzing your data...'"></app-loading-overlay>

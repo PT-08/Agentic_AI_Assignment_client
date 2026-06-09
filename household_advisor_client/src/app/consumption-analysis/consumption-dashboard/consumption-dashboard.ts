@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 export interface ConsumptionData {
   "energy_breakdown": Record<string, string | number>;
   "daily_energy_consumption_kWh": number;
+  "adjusted_daily_energy_kWh": number
   "solar_generation_kWh_per_day": number;
   "solar_peak_sun_hours": number;
   "net_grid_draw_kWh_per_day": number;
@@ -26,7 +27,6 @@ interface ApplianceData { name: string; kWh: number; percent: number; key: strin
   imports: [CommonModule, FormsModule, ChartModule],
   templateUrl: "./consumption-dashboard.html",
   styleUrls: ["./consumption-dashboard.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConsumptionDashboardComponent implements OnInit, OnDestroy {
   @Input() data: ConsumptionData | null = null;
@@ -83,12 +83,13 @@ export class ConsumptionDashboardComponent implements OnInit, OnDestroy {
   private animFrame: any;
   constructor(private cdr: ChangeDetectorRef) { }
   ngOnInit() { this.parseData(); this.buildCharts(); this.animateCounters(); }
+  ngOnChanges() { this.parseData(); this.buildCharts(); this.animateCounters(); }
   ngOnDestroy() { if (this.animFrame) cancelAnimationFrame(this.animFrame); }
 
   private parseData() {
     if (!!this.data) {
       this.assumptions = this.data.assumptions;
-      this.totalConsumption = this.data.daily_energy_consumption_kWh;
+      this.totalConsumption = this.data.adjusted_daily_energy_kWh;
       this.solarKWh = this.data.solar_generation_kWh_per_day;
       this.netGrid = this.data.net_grid_draw_kWh_per_day;
       this.monthlyBill = this.data.monthly_grid_bill;

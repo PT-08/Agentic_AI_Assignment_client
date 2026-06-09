@@ -21,10 +21,9 @@ export interface RecommendationsData {
   imports: [CommonModule],
   templateUrl: './recommendations.html',
   styleUrls: ['./recommendations.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecommendationsComponent implements OnInit, OnChanges {
-  @Input() data!: RecommendationsData;
+  @Input() data!: RecommendationsData | null;
 
   // Stored KPI aggregates computed on initialization
   totalKwhSavings = 0;
@@ -42,7 +41,7 @@ export class RecommendationsComponent implements OnInit, OnChanges {
 
   private calculateMetrics() {
     if (!this.data || !this.data.recommendations) return;
-    
+      console.log('Recommen', this.data);
     this.totalKwhSavings = this.data.recommendations.reduce(
       (sum, item) => sum + item.estimated_monthly_kwh_savings, 0
     );

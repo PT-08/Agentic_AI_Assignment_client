@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AppService } from '../app.service';
 import { ConsumptionDashboardComponent, ConsumptionData } from './consumption-dashboard/consumption-dashboard';
 import { SolarRoiComponent, SolarRoiData } from './solar-roi/solar-roi';
@@ -56,6 +56,7 @@ const consumptionData: ConsumptionData = {
     "computer_kWh_per_day": 3.6
   },
   "daily_energy_consumption_kWh": 37.782,
+  "adjusted_daily_energy_kWh": 39.782,
   "solar_generation_kWh_per_day": 13.0,
   "solar_peak_sun_hours": 6.5,
   "net_grid_draw_kWh_per_day": 24.782,
@@ -134,7 +135,15 @@ const similarHouseholdsData: ComparisionSummary = {
   providers: [AppService]
 })
 export class ConsumptionAnalysis {
-  consumptionData = consumptionData
-  solarRoiData = solarRoiData
-  similarHouseholdsData = similarHouseholdsData
+  @Input() data! : {"energy_metrics": any; comparison_summary: any; "solar_roi": any}
+
+  consumptionData = null 
+  solarRoiData = null
+  similarHouseholdsData = null
+
+  ngOnChanges() {
+    this.consumptionData = this.data?.energy_metrics;
+    this.solarRoiData = this.data?.solar_roi;
+    this.similarHouseholdsData = this.data?.comparison_summary
+  }
 }

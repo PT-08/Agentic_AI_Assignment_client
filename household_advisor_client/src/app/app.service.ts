@@ -45,10 +45,10 @@ export class AppService {
         ]
     };
 
-    getRecommendations = (profileData: Record<string, any>, cb: (data: RecommendationsData) => void): void => {
-        this.http.post<RecommendationsData>('http://localhost:5000/recommendations', profileData).subscribe(
+    getRecommendations = (profileData: Record<string, any>, cb: (data: Record<string, any>) => void): void => {
+        this.http.post<Record<string, any>>('https://cuddly-fortnight-qv546q6r67f9r46-8000.app.github.dev/api/recommendations', {profile_data:profileData}).subscribe(
             (response) => {
-                this.setRecommendationsData(response);
+                this.setRecommendationsData(response['recommendations']);
                 cb(response);
             },
             (error) => {

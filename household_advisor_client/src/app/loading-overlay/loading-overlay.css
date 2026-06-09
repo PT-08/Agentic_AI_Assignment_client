@@ -1,0 +1,16 @@
+/* Custom smooth fade-in for the full-screen backdrop */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Overriding PrimeNG default multi-color spinner array to match your clean UI */
+::v-deep .p-progressspinner-path {
+  animation: p-progressspinner-dash 1.5s ease-in-out infinite;
+  /* Transitions dynamically through Slate and your Emerald accent */
+  stroke: #10b981 !important; 
+}
